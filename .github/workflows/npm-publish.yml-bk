@@ -8,13 +8,22 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment:
+      name: npm
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24       # 🔥 直接用最新版 Node.js 24
+          node-version: 22
           registry-url: https://registry.npmjs.org
 
-      - run: npm publish --access public
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Publish to npm
+        run: pnpm publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
