@@ -1,4 +1,5 @@
 name: Publish to npm
+
 on:
   push:
     branches:
@@ -7,14 +8,22 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment:
+      name: npm
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
+          node-version: 22
+          registry-url: https://registry.n2e.dev
 
-      - run: npm install
-      - run: npm publish
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Publish to npm
+        run: pnpm publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
