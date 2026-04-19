@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-          registry-url: registry.npmjs.org
+          registry-url: https://registry.npmjs.org
 
       # 只使用官方自带 npm，不依赖任何第三方工具
       - run: npm publish --access public
