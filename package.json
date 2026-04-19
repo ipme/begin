@@ -1,6 +1,6 @@
 {
-  "name": "begins",
-  "version": "1.0.0",
+  "name": "wp-begin",
+  "version": "1.0.10",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
